@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EasyWheels Car Rental</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+<h2>EasyWheels</h2>
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#cars">Cars</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+<section id="home" class="hero">
+<div class="hero-content">
+<h1>Rent Your Dream Car</h1>
+<p>Affordable and Reliable Car Rentals</p>
+<button onclick="openModal()">Book Now</button>
+</div>
+</section>
+
+<section id="services" class="features">
+
+<div class="card">
+<h3>Affordable Prices</h3>
+<p>Best rental prices in the market.</p>
+</div>
+
+<div class="card">
+<h3>24/7 Support</h3>
+<p>Customer support anytime.</p>
+</div>
+
+<div class="card">
+<h3>Wide Selection</h3>
+<p>Choose from multiple vehicles.</p>
+</div>
+
+</section>
+
+<section id="contact" class="location">
+<h2>Your Location</h2>
+<button class="btn" onclick="getLocation()">Find My Location</button>
+<p id="loc"></p>
+</section>
+
+<section id="cars" class="cars">
+
+<h2>Available Cars</h2>
+
+<div class="grid-container">
+
+<div class="car">
+<img src="images/creta.jpg" alt="Hyundai Creta">
+<h3>Hyundai Creta</h3>
+<p>₹2500 / Day</p>
+<button class="btn" onclick="saveCar('Hyundai Creta')">Book</button>
+</div>
+
+<div class="car">
+<img src="images/city.jpg" alt="Honda City">
+<h3>Honda City</h3>
+<p>₹2200 / Day</p>
+<button class="btn" onclick="saveCar('Honda City')">Book</button>
+</div>
+
+<div class="car">
+<img src="images/innova.jpg" alt="Toyota Innova">
+<h3>Toyota Innova</h3>
+<p>₹3000 / Day</p>
+<button class="btn" onclick="saveCar('Toyota Innova')">Book</button>
+</div>
+
+</section>
+
+<div id="myModal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">&times;</span>
+<h2>Booking Successful</h2>
+<p>Your booking request has been submitted.</p>
+</div>
+</div>
+
+<script>
+
+function openModal(){
+document.getElementById("myModal").style.display="block";
+}
+
+function closeModal(){
+document.getElementById("myModal").style.display="none";
+}
+
+window.onclick = function(event){
+const modal = document.getElementById("myModal");
+if(event.target == modal){
+modal.style.display = "none";
+}
+}
+
+function getLocation(){
+
+if(navigator.geolocation){
+
+navigator.geolocation.getCurrentPosition(function(position){
+
+document.getElementById("loc").innerHTML =
+"Latitude: " + position.coords.latitude +
+"<br>Longitude: " + position.coords.longitude;
+
+});
+
+}else{
+
+document.getElementById("loc").innerHTML =
+"Geolocation is not supported by this browser.";
+
+}
+
+}
+
+function saveCar(car){
+
+localStorage.setItem("BookedCar", car);
+
+alert(car + " has been saved to Local Storage");
+
+}
+
+</script>
+
+</body>
+</html>
