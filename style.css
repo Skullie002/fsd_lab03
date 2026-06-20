@@ -1,3 +1,4 @@
+
 *{
 margin:0;
 padding:0;
@@ -119,32 +120,6 @@ margin-bottom:10px;
 color:#0f172a;
 }
 
-/* Location */
-
-.location{
-padding:60px;
-text-align:center;
-background:white;
-}
-
-.location h2{
-margin-bottom:20px;
-}
-
-.btn{
-padding:12px 25px;
-background:#0ea5e9;
-border:none;
-border-radius:25px;
-color:white;
-cursor:pointer;
-transition:0.3s;
-}
-
-.btn:hover{
-background:#0284c7;
-}
-
 /* Cars */
 
 .cars{
@@ -189,8 +164,93 @@ padding:15px 15px 5px;
 padding:0 15px 15px;
 }
 
-.car button{
-margin:15px;
+/* Booking Section */
+
+.booking{
+padding:80px 20px;
+background:white;
+}
+
+.booking h2{
+text-align:center;
+margin-bottom:30px;
+font-size:35px;
+}
+
+.booking form{
+max-width:650px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:15px;
+background:#f8fafc;
+padding:30px;
+border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.booking input,
+.booking select{
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+}
+
+.booking label{
+font-weight:600;
+text-align:left;
+}
+
+.booking button{
+padding:12px;
+background:#0ea5e9;
+border:none;
+border-radius:8px;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.booking button:hover{
+background:#0284c7;
+}
+
+#totalPrice{
+text-align:center;
+font-size:22px;
+font-weight:bold;
+padding:12px;
+background:white;
+border:1px solid #ddd;
+border-radius:8px;
+}
+
+/* Location */
+
+.location{
+padding:60px;
+text-align:center;
+background:white;
+}
+
+.location h2{
+margin-bottom:20px;
+}
+
+.btn{
+padding:12px 25px;
+background:#0ea5e9;
+border:none;
+border-radius:25px;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#0284c7;
 }
 
 /* Modal */
@@ -239,6 +299,11 @@ flex-direction:column;
 gap:15px;
 }
 
+nav ul{
+flex-wrap:wrap;
+justify-content:center;
+}
+
 .hero-content h1{
 font-size:40px;
 }
@@ -259,8 +324,28 @@ padding:40px 20px;
 padding:40px 20px;
 }
 
+.booking{
+padding:40px 20px;
+}
+
 .modal-content{
 width:90%;
 }
+#loc{
+margin-top:20px;
+padding:20px;
+background:#f8fafc;
+border-radius:12px;
+max-width:450px;
+margin-left:auto;
+margin-right:auto;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+#loc h3{
+color:#0ea5e9;
+margin-bottom:10px;
+}
 
 }
+```

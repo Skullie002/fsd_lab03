@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,43 +14,40 @@
 <h2>EasyWheels</h2>
 <ul>
 <li><a href="#home">Home</a></li>
-<li><a href="#cars">Cars</a></li>
 <li><a href="#services">Services</a></li>
-<li><a href="#contact">Contact</a></li>
+<li><a href="#cars">Cars</a></li>
+<li><a href="#booking">Booking</a></li>
+<li><a href="#contact">Branch Locator</a></li>
 </ul>
 </nav>
 
 <section id="home" class="hero">
 <div class="hero-content">
 <h1>Rent Your Dream Car</h1>
-<p>Affordable and Reliable Car Rentals</p>
-<button onclick="openModal()">Book Now</button>
+<p>Affordable and Reliable Car Rentals Across Kerala</p>
+<a href="#booking">
+<button>Book Now</button>
+</a>
 </div>
 </section>
 
 <section id="services" class="features">
 
 <div class="card">
-<h3>Affordable Prices</h3>
-<p>Best rental prices in the market.</p>
+<h3>Affordable Pricing</h3>
+<p>Competitive rental rates for all vehicles.</p>
 </div>
 
 <div class="card">
 <h3>24/7 Support</h3>
-<p>Customer support anytime.</p>
+<p>Customer assistance whenever required.</p>
 </div>
 
 <div class="card">
-<h3>Wide Selection</h3>
-<p>Choose from multiple vehicles.</p>
+<h3>Wide Vehicle Selection</h3>
+<p>Choose from sedans, SUVs and family cars.</p>
 </div>
 
-</section>
-
-<section id="contact" class="location">
-<h2>Your Location</h2>
-<button class="btn" onclick="getLocation()">Find My Location</button>
-<p id="loc"></p>
 </section>
 
 <section id="cars" class="cars">
@@ -62,31 +60,126 @@
 <img src="images/creta.jpg" alt="Hyundai Creta">
 <h3>Hyundai Creta</h3>
 <p>₹2500 / Day</p>
-<button class="btn" onclick="saveCar('Hyundai Creta')">Book</button>
 </div>
 
 <div class="car">
 <img src="images/city.jpg" alt="Honda City">
 <h3>Honda City</h3>
 <p>₹2200 / Day</p>
-<button class="btn" onclick="saveCar('Honda City')">Book</button>
 </div>
 
 <div class="car">
 <img src="images/innova.jpg" alt="Toyota Innova">
 <h3>Toyota Innova</h3>
 <p>₹3000 / Day</p>
-<button class="btn" onclick="saveCar('Toyota Innova')">Book</button>
+</div>
+
 </div>
 
 </section>
 
-<div id="myModal" class="modal">
-<div class="modal-content">
-<span class="close" onclick="closeModal()">&times;</span>
-<h2>Booking Successful</h2>
-<p>Your booking request has been submitted.</p>
+<section id="booking" class="booking">
+
+<h2>Book Your Vehicle</h2>
+
+<form id="bookingForm">
+
+<input
+type="text"
+id="name"
+placeholder="Full Name"
+required>
+
+<input
+type="email"
+id="email"
+placeholder="Email Address"
+required>
+
+<input
+type="tel"
+id="phone"
+placeholder="Phone Number"
+required>
+
+<select id="carSelect" required>
+<option value="">Select Vehicle</option>
+<option value="2500">Hyundai Creta - ₹2500/day</option>
+<option value="2200">Honda City - ₹2200/day</option>
+<option value="3000">Toyota Innova - ₹3000/day</option>
+</select>
+
+<label>Pickup Date</label>
+<input
+type="date"
+id="pickupDate"
+required>
+
+<label>Return Date</label>
+<input
+type="date"
+id="returnDate"
+required>
+
+<select id="location" required>
+<option value="">Pickup Location</option>
+<option>Kochi</option>
+<option>Trivandrum</option>
+<option>Calicut</option>
+<option>Munnar</option>
+<option>Alappuzha</option>
+</select>
+
+<input
+type="text"
+id="license"
+placeholder="Driving License Number"
+required>
+
+<div id="totalPrice">
+Total Cost: ₹0
 </div>
+
+<button type="submit">
+Confirm Booking
+</button>
+
+</form>
+
+</section>
+
+<section id="contact" class="location">
+
+<h2>Find Nearest EasyWheels Branch</h2>
+
+<button class="btn" onclick="getLocation()">
+Find Nearby Branch
+</button>
+
+<div id="loc">
+Click the button to locate the nearest pickup center.
+</div>
+
+</section>
+
+<footer>
+<p>© 2026 EasyWheels Car Rental. All Rights Reserved.</p>
+</footer>
+
+<div id="myModal" class="modal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closeModal()">
+&times;
+</span>
+
+<h2>Booking Successful</h2>
+
+<p>Your booking request has been submitted successfully.</p>
+
+</div>
+
 </div>
 
 <script>
@@ -99,12 +192,92 @@ function closeModal(){
 document.getElementById("myModal").style.display="none";
 }
 
-window.onclick = function(event){
-const modal = document.getElementById("myModal");
-if(event.target == modal){
-modal.style.display = "none";
+window.onclick=function(event){
+
+let modal=document.getElementById("myModal");
+
+if(event.target==modal){
+modal.style.display="none";
 }
+
+};
+
+const carSelect=document.getElementById("carSelect");
+const pickupDate=document.getElementById("pickupDate");
+const returnDate=document.getElementById("returnDate");
+const totalPrice=document.getElementById("totalPrice");
+
+function calculatePrice(){
+
+let rate=parseInt(carSelect.value);
+
+if(!rate || !pickupDate.value || !returnDate.value){
+totalPrice.innerHTML="Total Cost: ₹0";
+return;
 }
+
+let start=new Date(pickupDate.value);
+let end=new Date(returnDate.value);
+
+let days=Math.ceil((end-start)/(1000*60*60*24));
+
+if(days>0){
+totalPrice.innerHTML=
+"Total Cost: ₹" + (days * rate);
+}
+
+}
+
+carSelect.addEventListener("change",calculatePrice);
+pickupDate.addEventListener("change",calculatePrice);
+returnDate.addEventListener("change",calculatePrice);
+
+document.getElementById("bookingForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let name=document.getElementById("name").value.trim();
+let phone=document.getElementById("phone").value.trim();
+let car=document.getElementById("carSelect").value;
+let location=document.getElementById("location").value;
+
+if(name.length<3){
+alert("Name must contain at least 3 characters");
+return;
+}
+
+if(phone.length<10){
+alert("Enter a valid phone number");
+return;
+}
+
+if(car===""){
+alert("Please select a vehicle");
+return;
+}
+
+if(location===""){
+alert("Please select a pickup location");
+return;
+}
+
+if(new Date(returnDate.value)<=new Date(pickupDate.value)){
+alert("Return date must be after pickup date");
+return;
+}
+
+localStorage.setItem("customerName",name);
+localStorage.setItem("selectedCar",car);
+localStorage.setItem("pickupLocation",location);
+
+openModal();
+
+this.reset();
+
+totalPrice.innerHTML="Total Cost: ₹0";
+
+});
 
 function getLocation(){
 
@@ -112,13 +285,32 @@ if(navigator.geolocation){
 
 navigator.geolocation.getCurrentPosition(function(position){
 
+let lat = position.coords.latitude;
+let lon = position.coords.longitude;
+
+if(lat > 12 && lon > 77){
+
 document.getElementById("loc").innerHTML =
-"Latitude: " + position.coords.latitude +
-"<br>Longitude: " + position.coords.longitude;
+"<h3>Nearest EasyWheels Branch</h3>" +
+"<p><strong>Bangalore Partner Branch</strong></p>" +
+"<p>Outside Kerala Service Area</p>";
+
+return;
+}
+
+document.getElementById("loc").innerHTML =
+"<h3>Nearest EasyWheels Branch</h3>" +
+"<p><strong>Kochi</strong></p>" +
+"<p>Main Kerala Pickup Hub</p>";
 
 });
 
-}else{
+}
+
+}
+
+}
+else{
 
 document.getElementById("loc").innerHTML =
 "Geolocation is not supported by this browser.";
@@ -127,15 +319,8 @@ document.getElementById("loc").innerHTML =
 
 }
 
-function saveCar(car){
-
-localStorage.setItem("BookedCar", car);
-
-alert(car + " has been saved to Local Storage");
-
-}
-
 </script>
 
 </body>
 </html>
+```
