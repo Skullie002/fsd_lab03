@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EasyWheels Registration</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<nav>
+
+<h2>EasyWheels</h2>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="index.html#services">Services</a></li>
+
+<li><a href="index.html#cars">Cars</a></li>
+
+<li><a href="index.html#booking">Booking</a></li>
+
+<li><a href="registration.html">Register</a></li>
+
+<li><a href="index.html#contact">Branch Locator</a></li>
+
+</ul>
+
+</nav>
+
+<section class="registration">
+
+<h2>Create Your EasyWheels Account</h2>
+
+<p>
+Register once and enjoy faster vehicle bookings.
+</p>
+
+<form id="registrationForm">
+
+<input
+type="text"
+id="name"
+placeholder="Full Name"
+required>
+
+<input
+type="email"
+id="email"
+placeholder="Email Address"
+required>
+
+<input
+type="password"
+id="password"
+placeholder="Password"
+required
+minlength="6">
+
+<input
+type="tel"
+id="phone"
+placeholder="Phone Number"
+pattern="[0-9]{10}"
+required>
+
+<label>Date of Birth</label>
+
+<input
+type="date"
+id="dob"
+required>
+
+<label>Gender</label>
+
+<select id="gender" required>
+
+<option value="">Select Gender</option>
+
+<option>Male</option>
+
+<option>Female</option>
+
+<option>Other</option>
+
+</select>
+
+<label>Preferred Pickup Location</label>
+
+<select id="location" required>
+
+<option value="">Select Location</option>
+
+<option>Kochi</option>
+
+<option>Trivandrum</option>
+
+<option>Calicut</option>
+
+<option>Munnar</option>
+
+<option>Alappuzha</option>
+
+</select>
+
+<label>Preferred Vehicle</label>
+
+<select id="vehicle" required>
+
+<option value="">Select Vehicle</option>
+
+<option>Hyundai Creta</option>
+
+<option>Honda City</option>
+
+<option>Toyota Innova</option>
+
+</select>
+
+<input
+type="text"
+id="licenseNumber"
+placeholder="Driving License Number"
+required>
+
+<label>Upload Driving License</label>
+
+<input
+type="file"
+id="licenseFile"
+accept=".jpg,.jpeg,.png,.pdf"
+required>
+
+<textarea
+id="address"
+placeholder="Residential Address"
+required></textarea>
+
+<button type="submit">
+
+Register
+
+</button>
+
+</form>
+
+<div id="registrationCard">
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+
+© 2026 EasyWheels Car Rental. All Rights Reserved.
+
+</p>
+
+</footer>
+
+<script>
+    document.getElementById("registrationForm")
+.addEventListener("submit",(e)=>{
+
+e.preventDefault();
+
+let name=document.getElementById("name").value.trim();
+let email=document.getElementById("email").value.trim();
+let password=document.getElementById("password").value;
+let phone=document.getElementById("phone").value.trim();
+let dob=document.getElementById("dob").value;
+let gender=document.getElementById("gender").value;
+let location=document.getElementById("location").value;
+let vehicle=document.getElementById("vehicle").value;
+let licenseNumber=document.getElementById("licenseNumber").value.trim();
+let address=document.getElementById("address").value.trim();
+
+let licenseFile=document.getElementById("licenseFile");
+
+let fileName="No File Selected";
+
+if(licenseFile.files.length>0){
+fileName=licenseFile.files[0].name;
+}
+
+if(name.length<3){
+alert("Name must contain at least 3 characters.");
+return;
+}
+
+if(phone.length!=10){
+alert("Enter a valid 10-digit phone number.");
+return;
+}
+
+if(location==""){
+alert("Please select a pickup location.");
+return;
+}
+
+if(vehicle==""){
+alert("Please select a preferred vehicle.");
+return;
+}
+
+let user={
+
+name:name,
+email:email,
+password:password,
+phone:phone,
+dob:dob,
+gender:gender,
+location:location,
+vehicle:vehicle,
+licenseNumber:licenseNumber,
+licenseFile:fileName,
+address:address
+
+};
+
+localStorage.setItem(
+"registeredUser",
+JSON.stringify(user)
+);
+
+localStorage.setItem("isRegistered","true");
+
+document.getElementById("registrationCard").innerHTML=`
+
+<div class="user-card">
+
+<h3>Registration Successful</h3>
+
+<p><strong>Full Name:</strong> ${name}</p>
+
+<p><strong>Email:</strong> ${email}</p>
+
+<p><strong>Password:</strong> ${password}</p>
+
+<p><strong>Phone:</strong> ${phone}</p>
+
+<p><strong>Date of Birth:</strong> ${dob}</p>
+
+<p><strong>Gender:</strong> ${gender}</p>
+
+<p><strong>Pickup Location:</strong> ${location}</p>
+
+<p><strong>Preferred Vehicle:</strong> ${vehicle}</p>
+
+<p><strong>License Number:</strong> ${licenseNumber}</p>
+
+<p><strong>Uploaded File:</strong> ${fileName}</p>
+
+<p><strong>Address:</strong> ${address}</p>
+
+</div>
+
+`;
+
+alert("Registration Successful!");
+
+document.getElementById("registrationForm").reset();
+
+window.location.href="index.html";
+
+});
+</script>
+
+</body>
+</html>
